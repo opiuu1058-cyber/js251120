@@ -14,16 +14,11 @@
             color: #333;
         }
 
-        /* Interactive Content Container */
         .interactive-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 80vh; /* Adjust height to not overlap with the ground */
             text-align: center;
             position: relative;
             z-index: 10; /* Ensure this is on top */
+            padding-top: 50px; /* Add some space from the top */
         }
 
         .interactive-container h1 {
@@ -62,12 +57,14 @@
             background-color: rgba(255, 255, 255, 0.7);
             padding: 10px;
             border-radius: 5px;
+            display: inline-block;
         }
 
         /* Animation Elements */
         .ground {
             position: absolute;
             bottom: 0;
+            left: 0;
             width: 100%;
             height: 100px;
             background-color: #228B22; /* Forest Green */
@@ -179,6 +176,20 @@
             0%, 100% { transform: rotate(-20deg); }
             50% { transform: rotate(20deg); }
         }
+
+        /* Jump Animation */
+        .dog.jump {
+            animation-name: jump, walk-cycle;
+            animation-duration: 0.5s, 10s;
+            animation-timing-function: ease, linear;
+            animation-delay: 0s, 0s;
+            animation-iteration-count: 1, infinite;
+        }
+
+        @keyframes jump {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-60px); }
+        }
     </style>
 </head>
 <body>
@@ -206,6 +217,7 @@
     </div>
 
     <script>
+        // Greeting script
         const nameInput = document.getElementById('nameInput');
         const greetButton = document.getElementById('greetButton');
         const resultParagraph = document.getElementById('result');
@@ -217,6 +229,19 @@
             } else {
                 resultParagraph.textContent = 'Please enter your name.';
             }
+        });
+
+        // Dog jump script
+        const dogElement = document.querySelector('.dog');
+
+        dogElement.addEventListener('click', () => {
+            if (!dogElement.classList.contains('jump')) {
+                dogElement.classList.add('jump');
+            }
+        });
+
+        dogElement.addEventListener('animationend', () => {
+            dogElement.classList.remove('jump');
         });
     </script>
 
