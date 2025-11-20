@@ -17,8 +17,8 @@
         .interactive-container {
             text-align: center;
             position: relative;
-            z-index: 10; /* Ensure this is on top */
-            padding-top: 50px; /* Add some space from the top */
+            z-index: 10;
+            padding-top: 50px; /* Re-add padding to push content down from top */
         }
 
         .interactive-container h1 {
@@ -61,10 +61,10 @@
         }
 
         #click-instruction {
-            position: absolute;
-            top: 85%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: absolute; /* Absolute positioning relative to viewport */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for element's own size */
             color: white;
             font-size: 1.5em;
             font-weight: bold;
