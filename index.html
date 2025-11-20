@@ -179,16 +179,17 @@
 
         /* Jump Animation */
         .dog.jump {
-            animation-name: jump, walk-cycle;
-            animation-duration: 0.5s, 10s;
-            animation-timing-function: ease, linear;
-            animation-delay: 0s, 0s;
-            animation-iteration-count: 1, infinite;
+            /* Temporarily override the walk-cycle with the jump animation */
+            animation: jump 0.6s ease-out;
         }
 
         @keyframes jump {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-60px); }
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-60px); /* Jump height */
+            }
         }
     </style>
 </head>
@@ -240,8 +241,11 @@
             }
         });
 
-        dogElement.addEventListener('animationend', () => {
-            dogElement.classList.remove('jump');
+        dogElement.addEventListener('animationend', (event) => {
+            // Ensure we only remove the class when the jump animation ends
+            if (event.animationName === 'jump') {
+                dogElement.classList.remove('jump');
+            }
         });
     </script>
 
