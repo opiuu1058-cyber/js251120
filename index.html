@@ -62,7 +62,7 @@
 
         #click-instruction {
             position: absolute;
-            top: 55%;
+            top: 75%;
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
@@ -96,6 +96,12 @@
         @keyframes walk-cycle {
             0% { left: -150px; }
             100% { left: 100%; }
+        }
+
+        .dog-sprite {
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
 
         .body {
@@ -190,8 +196,7 @@
         }
 
         /* Jump Animation */
-        .dog.jump {
-            /* Temporarily override the walk-cycle with the jump animation */
+        .dog-sprite.jump {
             animation: jump 0.6s ease-out;
         }
 
@@ -208,16 +213,18 @@
 <body>
 
     <div class="interactive-container">
-        <h1>Interactive Greeting</h1>
-        <p>Enter your name:</p>
-        <input type="text" id="nameInput" placeholder="Your Name">
-        <button id="greetButton">Greet Me!</button>
-                <p id="result"></p>
-                <p id="click-instruction">click the puppy!</p>
-            </div>
-        
-            <div class="ground"></div>
-            <div class="dog">
+            <h1>Interactive Greeting</h1>
+            <p>Enter your name:</p>
+            <input type="text" id="nameInput" placeholder="Your Name">
+            <button id="greetButton">Greet Me!</button>
+            <p id="result"></p>
+            <p id="click-instruction">click the puppy!</p>
+        </div>
+    
+        <div class="ground"></div>
+    
+        <div class="dog">
+            <div class="dog-sprite">
                 <div class="body"></div>
                 <div class="tail"></div>
                 <div class="head">
@@ -228,38 +235,39 @@
                 <div class="leg front"></div>
                 <div class="leg back"></div>
             </div>
-        
-            <script>
-                // Greeting script
-                const nameInput = document.getElementById('nameInput');
-                const greetButton = document.getElementById('greetButton');
-                const resultParagraph = document.getElementById('result');
-        
-                greetButton.addEventListener('click', () => {
-                    const name = nameInput.value;
-                    if (name.trim() !== '') {
-                        resultParagraph.textContent = `Hello, ${name}! Welcome.`;
-                    } else {
-                        resultParagraph.textContent = 'Please enter your name.';
-                    }
-                });
-        
-                // Dog jump script
-                const dogElement = document.querySelector('.dog');
-        
-                dogElement.addEventListener('click', () => {
-                    if (!dogElement.classList.contains('jump')) {
-                        dogElement.classList.add('jump');
-                    }
-                });
-        
-                dogElement.addEventListener('animationend', (event) => {
-                    // Ensure we only remove the class when the jump animation ends
-                    if (event.animationName === 'jump') {
-                        dogElement.classList.remove('jump');
-                    }
-                });
-            </script>
-        
-        </body>
-        </html>
+        </div>
+    
+        <script>
+            // Greeting script
+            const nameInput = document.getElementById('nameInput');
+            const greetButton = document.getElementById('greetButton');
+            const resultParagraph = document.getElementById('result');
+    
+            greetButton.addEventListener('click', () => {
+                const name = nameInput.value;
+                if (name.trim() !== '') {
+                    resultParagraph.textContent = `Hello, ${name}! Welcome.`;
+                } else {
+                    resultParagraph.textContent = 'Please enter your name.';
+                }
+            });
+    
+            // Dog jump script
+            const dogElement = document.querySelector('.dog');
+            const dogSprite = document.querySelector('.dog-sprite');
+    
+            dogElement.addEventListener('click', () => {
+                if (!dogSprite.classList.contains('jump')) {
+                    dogSprite.classList.add('jump');
+                }
+            });
+    
+            dogSprite.addEventListener('animationend', (event) => {
+                // Ensure we only remove the class when the jump animation ends
+                if (event.animationName === 'jump') {
+                    dogSprite.classList.remove('jump');
+                }
+            });
+        </script>
+    </body>
+    </html>
