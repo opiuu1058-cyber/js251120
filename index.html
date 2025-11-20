@@ -60,6 +60,18 @@
             display: inline-block;
         }
 
+        #click-instruction {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            pointer-events: none; /* Make sure it doesn't block clicks */
+        }
+
         /* Animation Elements */
         .ground {
             position: absolute;
@@ -201,6 +213,7 @@
         <input type="text" id="nameInput" placeholder="Your Name">
         <button id="greetButton">Greet Me!</button>
         <p id="result"></p>
+        <p id="click-instruction">강아지를 눌러보세요</p>
     </div>
 
     <div class="ground"></div>
@@ -234,10 +247,17 @@
 
         // Dog jump script
         const dogElement = document.querySelector('.dog');
+        const instructionElement = document.getElementById('click-instruction');
+        let instructionVisible = true;
 
         dogElement.addEventListener('click', () => {
             if (!dogElement.classList.contains('jump')) {
                 dogElement.classList.add('jump');
+
+                if (instructionVisible) {
+                    instructionElement.style.display = 'none';
+                    instructionVisible = false;
+                }
             }
         });
 
